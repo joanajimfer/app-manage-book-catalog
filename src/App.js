@@ -9,7 +9,7 @@ const booksArray = []
     constructor() {
       super();
       this.state = {
-        books: booksArray
+        books: this.getDataFromLocalStorage()
       };
       this.handleSubmit = this.handleSubmit.bind(this);
       
@@ -35,6 +35,7 @@ const booksArray = []
       });
       
       
+      
     }
 
     handleDelete(bookToDelete) {
@@ -50,6 +51,15 @@ const booksArray = []
 
     saveInLocalStorage() {
       localStorage.setItem('booksInList', JSON.stringify(this.state.books));
+    }
+
+    getDataFromLocalStorage() {
+      const savedBooks = localStorage.getItem("booksInList");
+      if (savedBooks.length == 0) {
+        return [];
+      } else {
+        return JSON.parse(savedBooks);
+      }
     }
 
   
