@@ -50,20 +50,27 @@ const booksArray = []
       console.log('message',this.state.books);
       return (   
         <div>
-          <h2>Book Form:</h2>
+          <h2>Add a new book:</h2>
           <form onSubmit={this.handleSubmit}>
             <input type="text" ref="name" placeholder="name" />
             <input type="number" ref="price" placeholder="price" />
-            <input type="text" ref="gender" placeholder="gender" />
+            <select type="text" ref="gender" placeholder='gender'>
+              <option value='Terror'>Terror</option>
+              <option value='Romance'>Romance</option>
+              <option value='Adventures'>Adventures</option>
+              <option value='Poetry'>Poetry</option>
+              <option value='Informative'>Informative</option>
+              <option value='Other'>Other</option>
+            </select>
             <button type="submit">Submit</button>
           </form>
-          <h2>Exsiting books:</h2>
+          <h2>Book Catalogue:</h2>
           <ul>
             {books.map((book) => 
              <li>
-               <h3>NOMBRE: {book.name}</h3>
-               <p>PRECIO: {book.price}</p>
-               <h4>GÉNERO: {book.gender}</h4>
+               <h3>NAME: {book.name}</h3>
+               <p>PRICE: {book.price}</p>
+               <h4>GENDER: {book.gender}</h4>
                <button onClick={this.handleDelete.bind(this, book)}>Eliminar</button>
              </li>
             )}
