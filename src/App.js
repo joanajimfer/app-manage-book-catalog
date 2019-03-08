@@ -12,6 +12,7 @@ const booksArray = []
         books: booksArray
       };
       this.handleSubmit = this.handleSubmit.bind(this);
+      
     }
   
     handleSubmit(e) {
@@ -32,27 +33,35 @@ const booksArray = []
         this.refs.price.value = '';
         this.refs.gender.value = '';
       });
+      
+      
     }
 
     handleDelete(bookToDelete) {
       console.log(bookToDelete);
       const newBooks = this.state.books.filter((book) => {
-        return book != bookToDelete
+        return book !== bookToDelete
       })
       this.setState({
         books: newBooks
       })
-
+      this.saveInLocalStorage();
     }
+
+    saveInLocalStorage() {
+      localStorage.setItem('booksInList', JSON.stringify(this.state.books));
+    }
+
   
     render() {
       const { books } = this.state;
       console.log('message',this.state.books);
+      this.saveInLocalStorage();
       return (   
         <div>
           <h2>Add a new book:</h2>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" ref="name" placeholder="name" />
+            <input type="text" ref="name" placeholder="name" required/>
             <input type="number" ref="price" placeholder="price" />
             <select type="text" ref="gender" placeholder='gender'>
               <option value='Terror'>Terror</option>
@@ -71,7 +80,7 @@ const booksArray = []
                <h3>NAME: {book.name}</h3>
                <p>PRICE: {book.price}</p>
                <h4>GENDER: {book.gender}</h4>
-               <button onClick={this.handleDelete.bind(this, book)}>Eliminar</button>
+               <button onClick={this.handleDelete.bind(this, book)}>Delete</button>
              </li>
             )}
           </ul>
