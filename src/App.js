@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
 const booksArray = []
@@ -33,13 +33,24 @@ const booksArray = []
         this.refs.gender.value = '';
       });
     }
+
+    handleDelete(bookToDelete) {
+      console.log(bookToDelete);
+      const newBooks = this.state.books.filter((book) => {
+        return book != bookToDelete
+      })
+      this.setState({
+        books: newBooks
+      })
+
+    }
   
     render() {
       const { books } = this.state;
       console.log('message',this.state.books);
       return (   
         <div>
-          <h2>Add Someone</h2>
+          <h2>Book Form:</h2>
           <form onSubmit={this.handleSubmit}>
             <input type="text" ref="name" placeholder="name" />
             <input type="number" ref="price" placeholder="price" />
@@ -49,7 +60,12 @@ const booksArray = []
           <h2>Exsiting books:</h2>
           <ul>
             {books.map((book) => 
-             <li>{`Name: ${book.name} price: ${book.price} gender: ${book.gender}`}</li>
+             <li>
+               <h3>NOMBRE: {book.name}</h3>
+               <p>PRECIO: {book.price}</p>
+               <h4>GÉNERO: {book.gender}</h4>
+               <button onClick={this.handleDelete.bind(this, book)}>Eliminar</button>
+             </li>
             )}
           </ul>
         </div>
