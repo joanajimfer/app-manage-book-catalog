@@ -10,9 +10,11 @@ const booksArray = []
     constructor() {
       super();
       this.state = {
-        books: this.getDataFromLocalStorage()
+        books: this.getDataFromLocalStorage(),
+        optionsChecked:[]
       };
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleCheckbox = this.handleCheckbox.bind(this);
       
     }
   
@@ -33,11 +35,7 @@ const booksArray = []
         this.refs.name.value = '';
         this.refs.price.value = '';
         this.refs.gender.value = '';
-      });
-      
-      
-      
-    }
+      });}
 
     handleDelete(bookToDelete) {
       console.log(bookToDelete);
@@ -62,6 +60,28 @@ const booksArray = []
         return JSON.parse(savedBooks);
       }
     } 
+
+    handleCheckbox(event) {
+        let checkedArray = this.state.optionsChecked;
+        let selectedValue = event.target.value;
+          
+          if (event.target.checked === true) {
+          
+            checkedArray.push(selectedValue);
+              this.setState({
+                optionsChecked: checkedArray
+              });
+                          
+          } else {
+          
+            let valueIndex = checkedArray.indexOf(selectedValue);
+            checkedArray.splice(valueIndex, 1);
+              
+              this.setState({
+                optionsChecked: checkedArray
+              });     
+      }
+    }
 
   
     render() {
@@ -90,6 +110,11 @@ const booksArray = []
           </section>
           </header>
           <main>
+            <h2>Gender Filter:</h2>
+            <form>
+              <input type="checkbox" name="gender" value="terror" onClick={this.handleCheckbox} />Terror
+              <input type="checkbox" name="gender" value="romance" onClick={this.handleCheckbox} />Romance
+            </form>
           <h2 className='catalogue__title'>Book Catalogue:</h2>
           <ul className='catalogue__list'>
             {books.map((book) => 
