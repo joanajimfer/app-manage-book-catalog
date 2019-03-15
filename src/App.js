@@ -100,9 +100,10 @@ const booksArray = []
 
   
     render() {
-      const { books } = this.state;
-      console.log('message',this.state.books);
-      this.saveInLocalStorage();
+      const  books  = (this.filterBooks().length === 0) ? this.state.books : this.filterBooks();
+      console.log('message',this.state.books); 
+      
+      
       
       return (   
         <div>
