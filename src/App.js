@@ -79,8 +79,23 @@ const booksArray = []
               
               this.setState({
                 optionsChecked: checkedArray
-              });     
-      }
+              });}
+              this.filterBooks();}
+
+    filterBooks() {
+      const userGenders = this.state.optionsChecked[0];
+      const userArray = this.state.books.filter (item => {
+        const bookGender = item.gender;
+        console.log(bookGender);
+        if(bookGender.toLowerCase().includes(userGenders)) {
+          return true
+        } else {
+          return false
+        }
+      })
+      console.log('array', userArray);
+      return userArray;
+      
     }
 
   
@@ -88,6 +103,7 @@ const booksArray = []
       const { books } = this.state;
       console.log('message',this.state.books);
       this.saveInLocalStorage();
+      
       return (   
         <div>
           <header className='header__main'>
@@ -116,7 +132,7 @@ const booksArray = []
               <input type="checkbox" name="gender" value="romance" onClick={this.handleCheckbox} />Romance
               <input type="checkbox" name="gender" value="adventures" onClick={this.handleCheckbox} />Adventures
               <input type="checkbox" name="gender" value="poetry" onClick={this.handleCheckbox} />Poetry
-              <input type="checkbox" name="gender" value="tinformative" onClick={this.handleCheckbox} />Informative
+              <input type="checkbox" name="gender" value="informative" onClick={this.handleCheckbox} />Informative
               <input type="checkbox" name="gender" value="other" onClick={this.handleCheckbox} />Other
             </form>
           <h2 className='catalogue__title'>Book Catalogue:</h2>
