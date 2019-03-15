@@ -114,6 +114,10 @@ const booksArray = []
             <form>
               <input type="checkbox" name="gender" value="terror" onClick={this.handleCheckbox} />Terror
               <input type="checkbox" name="gender" value="romance" onClick={this.handleCheckbox} />Romance
+              <input type="checkbox" name="gender" value="adventures" onClick={this.handleCheckbox} />Adventures
+              <input type="checkbox" name="gender" value="poetry" onClick={this.handleCheckbox} />Poetry
+              <input type="checkbox" name="gender" value="tinformative" onClick={this.handleCheckbox} />Informative
+              <input type="checkbox" name="gender" value="other" onClick={this.handleCheckbox} />Other
             </form>
           <h2 className='catalogue__title'>Book Catalogue:</h2>
           <ul className='catalogue__list'>
